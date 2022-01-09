@@ -1,16 +1,17 @@
 ﻿using FileSystemLibrary;
+using FileSystemLibrary.Events;
 using FileSystemLibrary.Filters;
 using FileSystemLibrary.Models;
 using System;
-using static FileSystemLibrary.Filters.FilterType;
 
 namespace FileSystemConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             FileSystemVisitor fileSystemVisitor = new();
+
             string path = "C:\\";
 
             foreach (FileSystemItem fileSystemItem in fileSystemVisitor.GetFileSystemItems(path))
@@ -20,7 +21,7 @@ namespace FileSystemConsoleApp
 
             Console.WriteLine();
 
-            FileSystemVisitor fileSystemVisitorWithFilter = new(new FileSystemItemFilter(Filter.ModifiedBefore, "1/1/2022"));
+            FileSystemVisitor fileSystemVisitorWithFilter = new(Filter.Type, "Directory", ActionType.ExcludeItems);
 
             foreach (FileSystemItem fileSystemItem in fileSystemVisitorWithFilter.GetFileSystemItems(path))
             {

@@ -1,6 +1,5 @@
 ﻿using FileSystemLibrary.Models;
 using System;
-using static FileSystemLibrary.Filters.FilterType;
 
 namespace FileSystemLibrary.Filters
 {

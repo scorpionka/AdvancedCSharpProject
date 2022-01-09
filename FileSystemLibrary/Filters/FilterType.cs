@@ -1,13 +1,10 @@
 ﻿namespace FileSystemLibrary.Filters
 {
-    public class FilterType
+    public enum Filter
     {
-        public enum Filter
-        {
-            Type,
-            ContainsString,
-            ModifiedAfter,
-            ModifiedBefore,
-        }
+        Type,
+        ContainsString,
+        ModifiedAfter,
+        ModifiedBefore,
     }
 }

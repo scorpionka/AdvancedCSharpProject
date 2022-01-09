@@ -1,4 +1,5 @@
 ﻿using FileSystemLibrary.Extensions;
+using FileSystemLibrary.Filters;
 using FileSystemLibrary.Models;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +8,17 @@ namespace FileSystemLibrary
 {
     public class FileSystemVisitor : IFileSystemVisitor
     {
+        private readonly FileSystemItemFilter fileSystemItemFilter;
+
+        public FileSystemVisitor()
+        {
+        }
+
+        public FileSystemVisitor(FileSystemItemFilter fileSystemItemFilter)
+        {
+            this.fileSystemItemFilter = fileSystemItemFilter;
+        }
+
         public IEnumerable<FileSystemItem> GetFileSystemItems(string path)
         {
             var directory = new DirectoryInfo(path);
@@ -29,7 +41,14 @@ namespace FileSystemLibrary
 
             foreach (FileSystemItem fileSystemItem in fileSystemItems)
             {
-                yield return fileSystemItem;
+                if (this.fileSystemItemFilter is null)
+                {
+                    yield return fileSystemItem;
+                }
+                else if (this.fileSystemItemFilter.GetFilter(fileSystemItem, this.fileSystemItemFilter.GetParameter))
+                {
+                    yield return fileSystemItem;
+                }
             }
         }
     }

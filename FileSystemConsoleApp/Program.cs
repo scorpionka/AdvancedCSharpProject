@@ -14,7 +14,7 @@ namespace FileSystemConsoleApp
 
             string path = "C:\\";
 
-            foreach (FileSystemItem fileSystemItem in fileSystemVisitor.GetFileSystemItems(path))
+            foreach (FileSystemItem fileSystemItem in fileSystemVisitor.GetFileSystemInfo(path))
             {
                 Console.WriteLine(string.Format("{0} {1} {2}", fileSystemItem.Name, fileSystemItem.Type, fileSystemItem.DateModified));
             }
@@ -23,7 +23,7 @@ namespace FileSystemConsoleApp
 
             FileSystemVisitor fileSystemVisitorWithFilter = new(Filter.Type, "Directory", ActionType.ExcludeItems);
 
-            foreach (FileSystemItem fileSystemItem in fileSystemVisitorWithFilter.GetFileSystemItems(path))
+            foreach (FileSystemItem fileSystemItem in fileSystemVisitorWithFilter.GetFileSystemInfo(path))
             {
                 Console.WriteLine(string.Format("{0} {1} {2}", fileSystemItem.Name, fileSystemItem.Type, fileSystemItem.DateModified));
             }
@@ -32,7 +32,7 @@ namespace FileSystemConsoleApp
 
             fileSystemVisitorWithFilter = new(Filter.ModifiedAfter, "1/1/2022", ActionType.Continue);
 
-            foreach (FileSystemItem fileSystemItem in fileSystemVisitorWithFilter.GetFileSystemItems(path))
+            foreach (FileSystemItem fileSystemItem in fileSystemVisitorWithFilter.GetFileSystemInfo(path))
             {
                 Console.WriteLine(string.Format("{0} {1} {2}", fileSystemItem.Name, fileSystemItem.Type, fileSystemItem.DateModified));
             }

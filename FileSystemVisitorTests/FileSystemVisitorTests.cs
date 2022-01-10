@@ -3,20 +3,23 @@ using FileSystemLibrary.Models;
 using Moq;
 using NUnit.Framework;
 using System;
+using System.IO.Abstractions;
 
 namespace FileSystemVisitorTests
 {
     [TestFixture]
     public class FileSystemVisitorTests
     {
-        private FileSystemVisitor fileSystemVisitor;
-        private Mock<FileSystemItem> fileSystemItemMock;
+        private IFileSystemVisitor fileSystemVisitor;
+        private Mock<IDirectoryInfo> mockDirectoryInfo;
+        private Mock<FileSystemItem> mockFileSystemItem;
 
         [SetUp()]
-        public void ClassInit()
+        public void Init()
         {
             this.fileSystemVisitor = new FileSystemVisitor();
-            this.fileSystemItemMock = new Mock<FileSystemItem>();
+            this.mockDirectoryInfo = new Mock<IDirectoryInfo>();
+            this.mockFileSystemItem = new Mock<FileSystemItem>();
         }
 
         [Test]
@@ -24,7 +27,15 @@ namespace FileSystemVisitorTests
         {
             string path = null;
 
-            Assert.Throws<ArgumentNullException>(() => this.fileSystemVisitor.GetFileSystemItems(path));
+            Assert.Throws<ArgumentNullException>(() => this.fileSystemVisitor.GetFileSystemInfo(path));
+        }
+
+        [Test]
+        public void ThrowsArgumentExceptionIfPathIsEmpty()
+        {
+            string path = string.Empty;
+
+            Assert.Throws<ArgumentException>(() => this.fileSystemVisitor.GetFileSystemInfo(path));
         }
     }
 }

@@ -58,18 +58,24 @@ namespace FileSystemLibrary
         public event EventHandler Notify;
 
         /// <summary>
+        /// Gets the file system information.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
+        public IEnumerable<FileSystemItem> GetFileSystemInfo(string path)
+        {
+            Validator.Validator.ValidatePath(path);
+
+            return GetFileSystemItems(path);
+        }
+
+        /// <summary>
         /// Gets the file system items.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">path</exception>
-        public IEnumerable<FileSystemItem> GetFileSystemItems(string path)
+        private IEnumerable<FileSystemItem> GetFileSystemItems(string path)
         {
-            if (path is null)
-            {
-                throw new ArgumentNullException(nameof(path));
-            }
-
             DirectoryInfo directory = new(path);
             List<FileSystemItem> fileSystemItems = new();
 

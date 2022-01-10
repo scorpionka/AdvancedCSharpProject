@@ -13,6 +13,6 @@ namespace FileSystemLibrary
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns></returns>
-        IEnumerable<FileSystemItem> GetFileSystemItems(string path);
+        IEnumerable<FileSystemItem> GetFileSystemInfo(string path);
     }
 }

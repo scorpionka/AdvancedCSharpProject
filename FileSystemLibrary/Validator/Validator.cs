@@ -16,5 +16,24 @@ namespace FileSystemLibrary.Validator
         {
             return (DateTime.TryParse(dateTime, out DateTime correctDateTime), correctDateTime);
         }
+
+        /// <summary>
+        /// Validates the path.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
+        /// <exception cref="System.ArgumentNullException">path</exception>
+        public static void ValidatePath(string path)
+        {
+            if (path is null)
+            {
+                throw new ArgumentNullException(nameof(path));
+            }
+
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                throw new ArgumentException(string.Empty, nameof(path));
+            }
+        }
     }
 }

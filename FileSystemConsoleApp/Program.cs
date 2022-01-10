@@ -27,6 +27,15 @@ namespace FileSystemConsoleApp
             {
                 Console.WriteLine(string.Format("{0} {1} {2}", fileSystemItem.Name, fileSystemItem.Type, fileSystemItem.DateModified));
             }
+
+            Console.WriteLine();
+
+            fileSystemVisitorWithFilter = new(Filter.ModifiedAfter, "1/1/2022", ActionType.Continue);
+
+            foreach (FileSystemItem fileSystemItem in fileSystemVisitorWithFilter.GetFileSystemItems(path))
+            {
+                Console.WriteLine(string.Format("{0} {1} {2}", fileSystemItem.Name, fileSystemItem.Type, fileSystemItem.DateModified));
+            }
         }
     }
 }

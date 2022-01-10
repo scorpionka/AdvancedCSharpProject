@@ -1,8 +1,10 @@
 ﻿using System;
-using static FileSystemLibrary.Models.FileSystemItemType;
 
 namespace FileSystemLibrary.Models
 {
+    /// <summary>
+    /// File system item model
+    /// </summary>
     public class FileSystemItem
     {
         public string Name { get; set; }

@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace FileSystemLibrary
 {
-    interface IFileSystemVisitor
+    /// <summary>
+    /// Interface for file system visitor behavior
+    /// </summary>
+    public interface IFileSystemVisitor
     {
+        /// <summary>
+        /// Gets the file system items.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns></returns>
         IEnumerable<FileSystemItem> GetFileSystemItems(string path);
     }
 }

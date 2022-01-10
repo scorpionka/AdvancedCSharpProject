@@ -1,11 +1,11 @@
 ﻿namespace FileSystemLibrary.Models
 {
-    public static class FileSystemItemType
+    /// <summary>
+    /// Item type model
+    /// </summary>
+    public enum ItemType
     {
-        public enum ItemType
-        {
-            Directory,
-            File,
-        }
+        Directory,
+        File,
     }
 }

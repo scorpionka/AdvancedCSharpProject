@@ -9,7 +9,7 @@ namespace FileSystemLibrary.Filters
     public class FileSystemItemFilter
     {
         private readonly Func<FileSystemItem, string, bool> filter;
-        private readonly string parameter;
+        private readonly string filterParameter;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSystemItemFilter"/> class.
@@ -40,7 +40,7 @@ namespace FileSystemLibrary.Filters
                     break;
             }
 
-            this.parameter = filterParameter;
+            this.filterParameter = filterParameter;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace FileSystemLibrary.Filters
         /// <value>
         /// The filter parameter.
         /// </value>
-        public string GetParameter => this.parameter;
+        public string GetParameter => this.filterParameter;
 
         /// <summary>
         /// If the type is match

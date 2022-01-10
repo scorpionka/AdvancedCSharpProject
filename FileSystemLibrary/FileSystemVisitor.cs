@@ -61,21 +61,11 @@ namespace FileSystemLibrary
         /// Gets the file system information.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <returns></returns>
+        /// <returns>Sequence of file system items</returns>
         public IEnumerable<FileSystemItem> GetFileSystemInfo(string path)
         {
             Validator.Validator.ValidatePath(path);
 
-            return GetFileSystemItems(path);
-        }
-
-        /// <summary>
-        /// Gets the file system items.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <returns></returns>
-        private IEnumerable<FileSystemItem> GetFileSystemItems(string path)
-        {
             DirectoryInfo directory = new(path);
             List<FileSystemItem> fileSystemItems = new();
 
@@ -94,6 +84,16 @@ namespace FileSystemLibrary
                 }
             }
 
+            return SearchFileSystemItems(fileSystemItems);
+        }
+
+        /// <summary>
+        /// Searches the file system items.
+        /// </summary>
+        /// <param name="fileSystemItems">The file system items.</param>
+        /// <returns>Sequence of file system items</returns>
+        private IEnumerable<FileSystemItem> SearchFileSystemItems(List<FileSystemItem> fileSystemItems)
+        {
             Notify?.Invoke(this, new NotifyEventArgs("Search is started"));
 
             foreach (FileSystemItem fileSystemItem in fileSystemItems)

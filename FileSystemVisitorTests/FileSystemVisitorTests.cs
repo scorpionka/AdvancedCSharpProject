@@ -1,8 +1,10 @@
 using FileSystemLibrary;
-using FileSystemLibrary.Models;
+using FileSystemLibrary.Events;
+using FileSystemLibrary.Extensions;
 using Moq;
 using NUnit.Framework;
 using System;
+using System.IO;
 using System.IO.Abstractions;
 
 namespace FileSystemVisitorTests
@@ -11,19 +13,15 @@ namespace FileSystemVisitorTests
     public class FileSystemVisitorTests
     {
         private IFileSystemVisitor fileSystemVisitor;
-        private Mock<IDirectoryInfo> mockDirectoryInfo;
-        private Mock<FileSystemItem> mockFileSystemItem;
 
         [SetUp()]
         public void Init()
         {
             this.fileSystemVisitor = new FileSystemVisitor();
-            this.mockDirectoryInfo = new Mock<IDirectoryInfo>();
-            this.mockFileSystemItem = new Mock<FileSystemItem>();
         }
 
         [Test]
-        public void ThrowsArgumentNullExceptionIfPathIsNull()
+        public void ThrowsArgumentNullException_IfPathIsNull()
         {
             string path = null;
 
@@ -31,11 +29,39 @@ namespace FileSystemVisitorTests
         }
 
         [Test]
-        public void ThrowsArgumentExceptionIfPathIsEmpty()
+        public void ThrowsArgumentException_IfPathIsEmpty()
         {
             string path = string.Empty;
 
             Assert.Throws<ArgumentException>(() => this.fileSystemVisitor.GetFileSystemInfo(path));
+        }
+
+        [Test]
+        public void NotifyEventArgsConstructor_SetUpMessage()
+        {
+            NotifyEventArgs notifyEventArgs = new("New event");
+
+            Assert.That(notifyEventArgs.Message == "New event");
+        }
+
+        [Test]
+        public void NotifyEventArgsConstructor_SetUpEmptyMessage_IfNull()
+        {
+            NotifyEventArgs notifyEventArgs = new(null);
+
+            Assert.That(notifyEventArgs.Message == string.Empty);
+        }
+
+        [Test]
+        public void DirectoryExtensionThrowsArgumentNullException_IfDirectoryInfoIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => DirectoryExtension.GetDirectoryItem(null));
+        }
+
+        [Test]
+        public void FileExtensionThrowsArgumentNullException_IfFileInfoIsNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => FileExtension.GetFileItem(null));
         }
     }
 }
